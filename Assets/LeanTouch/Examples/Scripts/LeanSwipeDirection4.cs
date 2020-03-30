@@ -8,6 +8,7 @@ namespace Lean.Touch
 	{
 		[Tooltip("The text element we will display the swipe information in")]
 		public Text InfoText;
+        public Animator anim;
 	
 		protected virtual void OnEnable()
 		{
@@ -31,22 +32,23 @@ namespace Lean.Touch
 			
 				if (swipe.x < -Mathf.Abs(swipe.y))
 				{
-					InfoText.text = "You swiped left!";
+					//InfoText.text = "You swiped left!";
+                    anim.SetBool("atkleft", true);
 				}
 			
 				if (swipe.x > Mathf.Abs(swipe.y))
 				{
-					InfoText.text = "You swiped right!";
+					//InfoText.text = "You swiped right!";
 				}
 			
 				if (swipe.y < -Mathf.Abs(swipe.x))
 				{
-					InfoText.text = "You swiped down!";
+				//InfoText.text = "You swiped down!";
 				}
 			
 				if (swipe.y > Mathf.Abs(swipe.x))
 				{
-					InfoText.text = "You swiped up!";
+					//InfoText.text = "You swiped up!";
 				}
 			}
 		}

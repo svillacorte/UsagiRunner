@@ -66,6 +66,14 @@ public class PlayerController : MonoBehaviour {
     public LeftJoystick leftJoystick;
     public Vector3 leftJoystickInput;
 
+    public float maxboosttime;
+    public bool runner;
+    public float boosttime;
+    public Image boostbar;
+    public float boostSpeed;
+    public float standardSpeed;
+    public bool nowboosting;
+
 
 	// Use this for initialization
 	void Awake () {
@@ -85,8 +93,48 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Update is called once per frame
+    private void FixedUpdate()
+    {
+       if (myRigidBody.velocity.y < 0)
+        {
+            myRigidBody.gravityScale = 5;
+        }
+
+       else
+        {
+            myRigidBody.gravityScale = 3;
+        }
+    }
+
+
     void Update()
     {
+        if (runner == true)
+        {
+            myRigidBody.velocity = new Vector2(moveSpeed, myRigidBody.velocity.y);
+            boostbar.fillAmount = (boosttime / maxboosttime);
+        }
+
+        if (CnInputManager.GetButtonDown ("Boost") && nowboosting == false)
+        {
+            if (boosttime > 0)
+            {
+                boosttime -= 1;
+                nowboosting = true;
+                StartCoroutine(boostup());
+            }
+        }
+
+        if (CnInputManager.GetButtonDown("Jump")) //&& isGrounded)
+        {
+            jumpTime = jumpGrace;
+            //myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpSpeed, 0f);
+            if (jsound == true)
+            {
+                jumpSound.Play();
+            }
+            //jumpSound.Play();
+        }
 
         step = changespeed * Time.deltaTime;
 
@@ -292,23 +340,23 @@ public class PlayerController : MonoBehaviour {
                
             }
 
-            if (CnInputManager.GetButtonDown("Jump")) //&& isGrounded)
-            {
-                jumpTime = jumpGrace;
-                //myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpSpeed, 0f);
-                if (jsound == true)
-                {
-                    jumpSound.Play();
-                }
-                //jumpSound.Play();
-            }
+          
 
            
 
         }
     }
 
-        public void Jump()
+    IEnumerator boostup()
+    {
+
+        moveSpeed = boostSpeed;
+        yield return new WaitForSeconds(5f);
+        moveSpeed = standardSpeed;
+        nowboosting = false;
+    }
+
+    public void Jump()
     {
         //if (isGrounded)
         //{

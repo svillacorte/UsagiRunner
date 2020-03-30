@@ -13,6 +13,7 @@ public class LevelEnd1 : MonoBehaviour {
 	public float waitToMove;
 	public float waitToLoad;
 	private bool movePlayer;
+    public Animator anim;
 
 	public GameObject pauseScreen;
 
@@ -56,6 +57,7 @@ public class LevelEnd1 : MonoBehaviour {
 		//pauseScreen.SetActive (false);
 		theLevelManager.invincible = true;
 		thePlayer.myRigidBody.velocity = Vector3.zero;
+        anim.SetBool("end", true);
 
 		//PlayerPrefs.SetInt ("CoinCount", theLevelManager.coinCount);
 		//PlayerPrefs.SetInt ("PlayerLives", theLevelManager.currentLives);
