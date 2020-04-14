@@ -18,7 +18,7 @@ namespace CnControls
         /// Utility object that is registered in the system
         /// </summary>
         private VirtualButton _virtualButton;
-        
+
         /// <summary>
         /// It's pretty simple here
         /// When we enable, we register our button in the input system

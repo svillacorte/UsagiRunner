@@ -42,7 +42,7 @@ public class SingleJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
             Debug.LogError("There is no joystick handle image attached to this script.");
         }
 
-        if (GetComponent<Image>() != null && transform.GetChild(0).GetComponent<Image>() !=null)
+        if (GetComponent<Image>() != null && transform.GetChild(0).GetComponent<Image>() != null)
         {
             bgImage = GetComponent<Image>(); // gets the background image of this joystick
             joystickKnobImage = transform.GetChild(0).GetComponent<Image>(); // gets the joystick "knob" imae (the handle of the joystick), the joystick knob game object must be a child of this game object and have an image component 
@@ -58,7 +58,7 @@ public class SingleJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
             //bgImage.rectTransform.anchorMax = new Vector2(0, 0); // sets the max anchors to the lower left corner of the canvas
             bgImage.rectTransform.position = bgImageStartPosition; // sets the background image of this joystick back to the same position it was on the canvas before play was pressed
         }
-     }
+    }
 
     // this event happens when there is a drag on screen
     public virtual void OnDrag(PointerEventData ped)

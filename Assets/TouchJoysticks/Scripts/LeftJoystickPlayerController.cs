@@ -49,7 +49,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
         }
-  
+
         // if there is only input from the left joystick
         if (leftJoystickInput != Vector3.zero)
         {

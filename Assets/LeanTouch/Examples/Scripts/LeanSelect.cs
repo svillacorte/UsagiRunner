@@ -2,159 +2,159 @@ using UnityEngine;
 
 namespace Lean.Touch
 {
-	// This script allows you to select LeanSelectable components
-	public class LeanSelect : MonoBehaviour
-	{
-		public enum SelectType
-		{
-			Raycast3D,
-			Overlap2D
-		}
+    // This script allows you to select LeanSelectable components
+    public class LeanSelect : MonoBehaviour
+    {
+        public enum SelectType
+        {
+            Raycast3D,
+            Overlap2D
+        }
 
-		public enum SearchType
-		{
-			GetComponent,
-			GetComponentInParent,
-			GetComponentInChildren
-		}
-		
-		public SelectType SelectUsing;
+        public enum SearchType
+        {
+            GetComponent,
+            GetComponentInParent,
+            GetComponentInChildren
+        }
 
-		[Tooltip("This stores the layers we want the raycast/overlap to hit (make sure this GameObject's layer is included!)")]
-		public LayerMask LayerMask = Physics.DefaultRaycastLayers;
+        public SelectType SelectUsing;
 
-		[Tooltip("How should the selected GameObject be searched for the LeanSelectable component?")]
-		public SearchType Search;
+        [Tooltip("This stores the layers we want the raycast/overlap to hit (make sure this GameObject's layer is included!)")]
+        public LayerMask LayerMask = Physics.DefaultRaycastLayers;
 
-		[Tooltip("The currently selected LeanSelectable")]
-		public LeanSelectable CurrentSelectable;
+        [Tooltip("How should the selected GameObject be searched for the LeanSelectable component?")]
+        public SearchType Search;
 
-		[Tooltip("If you select an already selected selectable, should it get deselected?")]
-		public bool ToggleSelection;
-		
-		[Tooltip("Automatically deselect the CurrentSelectable if Select gets called with null?")]
-		public bool AutoDeselect;
-		
-		// NOTE: This must be called from somewhere
-		public void Select(LeanFinger finger)
-		{
-			// Stores the component we hit (Collider or Collider2D)
-			var component = default(Component);
+        [Tooltip("The currently selected LeanSelectable")]
+        public LeanSelectable CurrentSelectable;
 
-			switch (SelectUsing)
-			{
-				case SelectType.Raycast3D:
-				{
-					// Get ray for finger
-					var ray = finger.GetRay();
+        [Tooltip("If you select an already selected selectable, should it get deselected?")]
+        public bool ToggleSelection;
 
-					// Stores the raycast hit info
-					var hit = default(RaycastHit);
-					
-					// Was this finger pressed down on a collider?
-					if (Physics.Raycast(ray, out hit, float.PositiveInfinity, LayerMask) == true)
-					{
-						component = hit.collider;
-					}
-				}
-				break;
-				
-				case SelectType.Overlap2D:
-				{
-					// Find the position under the current finger
-					var point = finger.GetWorldPosition(1.0f);
+        [Tooltip("Automatically deselect the CurrentSelectable if Select gets called with null?")]
+        public bool AutoDeselect;
 
-					// Find the collider at this position
-					component = Physics2D.OverlapPoint(point, LayerMask);
-				}
-				break;
-			}
+        // NOTE: This must be called from somewhere
+        public void Select(LeanFinger finger)
+        {
+            // Stores the component we hit (Collider or Collider2D)
+            var component = default(Component);
 
-			// Select the component
-			Select(finger, component);
-		}
+            switch (SelectUsing)
+            {
+                case SelectType.Raycast3D:
+                    {
+                        // Get ray for finger
+                        var ray = finger.GetRay();
 
-		public void Select(LeanFinger finger, Component component)
-		{
-			// Stores the selectable we will search for
-			var selectable = default(LeanSelectable);
+                        // Stores the raycast hit info
+                        var hit = default(RaycastHit);
 
-			// Was a collider found?
-			if (component != null)
-			{
-				switch (Search)
-				{
-					case SearchType.GetComponent:           selectable = component.GetComponent          <LeanSelectable>(); break;
-					case SearchType.GetComponentInParent:   selectable = component.GetComponentInParent  <LeanSelectable>(); break;
-					case SearchType.GetComponentInChildren: selectable = component.GetComponentInChildren<LeanSelectable>(); break;
-				}
-			}
+                        // Was this finger pressed down on a collider?
+                        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, LayerMask) == true)
+                        {
+                            component = hit.collider;
+                        }
+                    }
+                    break;
 
-			// Select the selectable
-			Select(finger, selectable);
-		}
+                case SelectType.Overlap2D:
+                    {
+                        // Find the position under the current finger
+                        var point = finger.GetWorldPosition(1.0f);
 
-		public void Select(LeanFinger finger, LeanSelectable selectable)
-		{
-			// Something was selected?
-			if (selectable != null)
-			{
-				// Did we select a new LeanSelectable?
-				if (selectable != CurrentSelectable)
-				{
-					// Deselect the current
-					Deselect();
+                        // Find the collider at this position
+                        component = Physics2D.OverlapPoint(point, LayerMask);
+                    }
+                    break;
+            }
 
-					// Change current
-					CurrentSelectable = selectable;
+            // Select the component
+            Select(finger, component);
+        }
 
-					// Call select event on current
-					CurrentSelectable.Select(finger);
-				}
-				else
-				{
-					if (ToggleSelection == true)
-					{
-						Deselect();
-					}
-				}
-			}
-			// Nothing was selected?
-			else
-			{
-				// Deselect?
-				if (AutoDeselect == true)
-				{
-					Deselect();
-				}
-			}
-		}
-		
-		[ContextMenu("Deselect")]
-		public void Deselect()
-		{
-			// Is there a selected object?
-			if (CurrentSelectable != null)
-			{
-				// Deselect it
-				CurrentSelectable.Deselect();
+        public void Select(LeanFinger finger, Component component)
+        {
+            // Stores the selectable we will search for
+            var selectable = default(LeanSelectable);
 
-				// Mark it null
-				CurrentSelectable = null;
-			}
-		}
+            // Was a collider found?
+            if (component != null)
+            {
+                switch (Search)
+                {
+                    case SearchType.GetComponent: selectable = component.GetComponent<LeanSelectable>(); break;
+                    case SearchType.GetComponentInParent: selectable = component.GetComponentInParent<LeanSelectable>(); break;
+                    case SearchType.GetComponentInChildren: selectable = component.GetComponentInChildren<LeanSelectable>(); break;
+                }
+            }
 
-		public void Deselect(LeanFinger finger)
-		{
-			// Is there a selected object?
-			if (CurrentSelectable != null)
-			{
-				// Only deselect if the selected finger is null, or it matches
-				if (CurrentSelectable.Finger == null || CurrentSelectable.Finger == finger)
-				{
-					Deselect();
-				}
-			}
-		}
-	}
+            // Select the selectable
+            Select(finger, selectable);
+        }
+
+        public void Select(LeanFinger finger, LeanSelectable selectable)
+        {
+            // Something was selected?
+            if (selectable != null)
+            {
+                // Did we select a new LeanSelectable?
+                if (selectable != CurrentSelectable)
+                {
+                    // Deselect the current
+                    Deselect();
+
+                    // Change current
+                    CurrentSelectable = selectable;
+
+                    // Call select event on current
+                    CurrentSelectable.Select(finger);
+                }
+                else
+                {
+                    if (ToggleSelection == true)
+                    {
+                        Deselect();
+                    }
+                }
+            }
+            // Nothing was selected?
+            else
+            {
+                // Deselect?
+                if (AutoDeselect == true)
+                {
+                    Deselect();
+                }
+            }
+        }
+
+        [ContextMenu("Deselect")]
+        public void Deselect()
+        {
+            // Is there a selected object?
+            if (CurrentSelectable != null)
+            {
+                // Deselect it
+                CurrentSelectable.Deselect();
+
+                // Mark it null
+                CurrentSelectable = null;
+            }
+        }
+
+        public void Deselect(LeanFinger finger)
+        {
+            // Is there a selected object?
+            if (CurrentSelectable != null)
+            {
+                // Only deselect if the selected finger is null, or it matches
+                if (CurrentSelectable.Finger == null || CurrentSelectable.Finger == finger)
+                {
+                    Deselect();
+                }
+            }
+        }
+    }
 }

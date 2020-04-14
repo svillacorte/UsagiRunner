@@ -3,39 +3,40 @@ using System.Collections;
 using CnControls;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
-	public float moveSpeed;
-	public float jumpSpeed;
-	public Rigidbody2D myRigidBody;
+    public float moveSpeed;
+    public float jumpSpeed;
+    public Rigidbody2D myRigidBody;
 
     public float fallMultiplier = 2.5f;
     public float lowJumpMulti = 5f;
     public float speed;
 
     public Transform groundCheck;
-	public float groundCheckRadius;
-	public LayerMask whatIsGround;
-	public bool isGrounded;
+    public float groundCheckRadius;
+    public LayerMask whatIsGround;
+    public bool isGrounded;
 
-	private Animator myAnim;
+    private Animator myAnim;
 
-	public Vector3 respawnPosition;
-	public LevelManager theLevelManager;
+    public Vector3 respawnPosition;
+    public LevelManager theLevelManager;
 
-	public GameObject stompBox;
+    public GameObject stompBox;
 
-	public float knockBackForce;
-	public float knockBackLength;
-	public float knockBackCounter;
+    public float knockBackForce;
+    public float knockBackLength;
+    public float knockBackCounter;
 
-	public float invincibilityLength;
-	private float invincibilityCounter;
+    public float invincibilityLength;
+    private float invincibilityCounter;
 
-	public AudioSource jumpSound;
-	public AudioSource hitSound;
-    
-	public bool canMove;
+    public AudioSource jumpSound;
+    public AudioSource hitSound;
+
+    public bool canMove;
     public bool redbird;
     public bool shrunk;
     public bool flying;
@@ -75,37 +76,44 @@ public class PlayerController : MonoBehaviour {
     public bool nowboosting;
 
 
-	// Use this for initialization
-	void Awake () {
-	
-		canMove = true;
-		myRigidBody = GetComponent<Rigidbody2D>();
-		myAnim = GetComponent<Animator>();
-		respawnPosition = transform.position;
-		theLevelManager = FindObjectOfType<LevelManager>();
+    // Use this for initialization
+    void Awake()
+    {
 
-        if(joystick == true)
+        canMove = true;
+        myRigidBody = GetComponent<Rigidbody2D>();
+        myAnim = GetComponent<Animator>();
+        respawnPosition = transform.position;
+        theLevelManager = FindObjectOfType<LevelManager>();
+
+        if (joystick == true)
         {
             leftJoystick = FindObjectOfType<LeftJoystick>();
         }
-       
+
 
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-       if (myRigidBody.velocity.y < 0)
+        if (myRigidBody.velocity.y < 0)
         {
             myRigidBody.gravityScale = 5;
         }
 
-       else
+        else
         {
             myRigidBody.gravityScale = 3;
         }
     }
 
+    public void BoostUpgrade()
+    {
+        maxboosttime = 10;
+        boosttime = 10;
+        boostbar.transform.localScale = new Vector3(2, 1, 1);
+    }
 
     void Update()
     {
@@ -115,7 +123,7 @@ public class PlayerController : MonoBehaviour {
             boostbar.fillAmount = (boosttime / maxboosttime);
         }
 
-        if (CnInputManager.GetButtonDown ("Boost") && nowboosting == false)
+        if (CnInputManager.GetButtonDown("Boost") && nowboosting == false)
         {
             if (boosttime > 0)
             {
@@ -188,7 +196,7 @@ public class PlayerController : MonoBehaviour {
         {
             leftJoystickInput = leftJoystick.GetInputDirection();
         }
-       
+
 
         if (isGrounded == true)
         {
@@ -243,7 +251,7 @@ public class PlayerController : MonoBehaviour {
 
             }
 
-            if (Input.GetAxisRaw("Horizontal") > 0f )
+            if (Input.GetAxisRaw("Horizontal") > 0f)
             {
                 //transform.localScale = new Vector3 (1f, 1f, 1f);
                 myRigidBody.velocity = new Vector3(moveSpeed, myRigidBody.velocity.y, 0f);
@@ -274,9 +282,9 @@ public class PlayerController : MonoBehaviour {
 
             }
             //else 
-            
+
             //{
-               // myRigidBody.velocity = new Vector3(0f, myRigidBody.velocity.y, 0f);
+            // myRigidBody.velocity = new Vector3(0f, myRigidBody.velocity.y, 0f);
             //}
 
 
@@ -337,12 +345,12 @@ public class PlayerController : MonoBehaviour {
                 }
 
 
-               
+
             }
 
-          
 
-           
+
+
 
         }
     }
@@ -360,48 +368,49 @@ public class PlayerController : MonoBehaviour {
     {
         //if (isGrounded)
         //{
-            jumpTime = jumpGrace;
-            //myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpSpeed, 0f);
-            //jumpSound.Play();
+        jumpTime = jumpGrace;
+        //myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpSpeed, 0f);
+        //jumpSound.Play();
         //}
     }
 
-    public void Knockback ()
-	{
-		knockBackCounter = knockBackLength;
-		invincibilityCounter = invincibilityLength;
-		theLevelManager.invincible = true;
-	}
+    public void Knockback()
+    {
+        knockBackCounter = knockBackLength;
+        invincibilityCounter = invincibilityLength;
+        theLevelManager.invincible = true;
+    }
 
-	void OnTriggerEnter2D (Collider2D other)
-	{
+    void OnTriggerEnter2D(Collider2D other)
+    {
 
-		if (other.tag == "Checkpoint") 
-		{
-			respawnPosition = other.transform.position;
-		}
+        if (other.tag == "Checkpoint")
+        {
+            respawnPosition = other.transform.position;
+        }
 
-		if (other.tag == "KillPlane") 
-		{
-			//gameObject.SetActive (false);
-			//transform.position = respawnPosition;
-			if (theLevelManager.respawning == false) {
-				theLevelManager.Respawn ();
-			}
-		}
+        if (other.tag == "KillPlane")
+        {
+            //gameObject.SetActive (false);
+            //transform.position = respawnPosition;
+            if (theLevelManager.respawning == false)
+            {
+                theLevelManager.Respawn();
+            }
+        }
 
-        
+
 
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        
+
     }
 
 
-    void OnCollisionEnter2D (Collision2D other)
-	{
+    void OnCollisionEnter2D(Collision2D other)
+    {
         if (other.gameObject.tag == "MovingPlatform")
         {
             transform.parent = other.transform;
@@ -410,8 +419,8 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-	void OnCollisionExit2D (Collision2D other)
-	{
+    void OnCollisionExit2D(Collision2D other)
+    {
         if (other.gameObject.tag == "MovingPlatform")
         {
             transform.parent = null;

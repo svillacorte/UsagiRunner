@@ -34,7 +34,7 @@ public class SingleJoystickPlayerController : MonoBehaviour
         {
             Debug.LogError("A target rotation game object is not attached.");
         }
-}
+    }
 
     void Update()
     {
@@ -53,12 +53,12 @@ public class SingleJoystickPlayerController : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
         }
-  
+
         // if there is only input from joystick 01
         if (input01 != Vector3.zero)
         {
             //Move player the same distance in each direction. Player must move in a circular motion.
- 
+
             float tempAngle = Mathf.Atan2(zMovementInput01, xMovementInput01);
             xMovementInput01 *= Mathf.Abs(Mathf.Cos(tempAngle));
             zMovementInput01 *= Mathf.Abs(Mathf.Sin(tempAngle));

@@ -15,7 +15,7 @@ public class BoostUp : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             pc.boosttime += 1;
             this.gameObject.SetActive(false);
@@ -24,6 +24,6 @@ public class BoostUp : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }

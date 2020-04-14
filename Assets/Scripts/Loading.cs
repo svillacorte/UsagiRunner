@@ -15,6 +15,6 @@ public class Loading : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

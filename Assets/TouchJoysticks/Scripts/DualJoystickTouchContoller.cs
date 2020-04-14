@@ -72,7 +72,7 @@ public class DualJoystickTouchContoller : MonoBehaviour
         {
             rightJoystickHandleImage = rightJoystick.transform.GetChild(0).GetComponent<Image>(); // gets the handle (knob) image of the right joystick
             rightJoystickHandleImage.enabled = rightJoystickAlwaysVisible; // sets right joystick handle (knob) image to be always visible or not
-        } 
+        }
     }
 
     void Update()
@@ -95,45 +95,45 @@ public class DualJoystickTouchContoller : MonoBehaviour
                 // if this touch just started (finger is down for the first time), for this particular touch 
                 if (myTouches[i].phase == TouchPhase.Began)
                 {
-                        // if this touch is on the left-side half of screen
-                        if (myTouches[i].position.x < Screen.width / 2)
+                    // if this touch is on the left-side half of screen
+                    if (myTouches[i].position.x < Screen.width / 2)
+                    {
+                        leftSideFingerID = myTouches[i].fingerId; // stores the unique id for this touch that happened on the left-side half of the screen
+
+                        // if the left joystick will drag with any touch (left joystick is not set to stay in a fixed position)
+                        if (leftJoystick.joystickStaysInFixedPosition == false)
                         {
-                            leftSideFingerID = myTouches[i].fingerId; // stores the unique id for this touch that happened on the left-side half of the screen
+                            var currentPosition = leftJoystickBackgroundImage.rectTransform.position; // gets the current position of the left joystick
+                            currentPosition.x = myTouches[i].position.x + leftJoystickBackgroundImage.rectTransform.sizeDelta.x / 2; // calculates the x position of the left joystick to where the screen was touched
+                            currentPosition.y = myTouches[i].position.y - leftJoystickBackgroundImage.rectTransform.sizeDelta.y / 2; // calculates the y position of the left joystick to where the screen was touched
 
-                            // if the left joystick will drag with any touch (left joystick is not set to stay in a fixed position)
-                            if (leftJoystick.joystickStaysInFixedPosition == false)
+                            // keeps the left joystick on the left-side half of the screen
+                            currentPosition.x = Mathf.Clamp(currentPosition.x, 0 + leftJoystickBackgroundImage.rectTransform.sizeDelta.x, Screen.width / 2);
+                            currentPosition.y = Mathf.Clamp(currentPosition.y, 0, Screen.height - leftJoystickBackgroundImage.rectTransform.sizeDelta.y);
+
+                            leftJoystickBackgroundImage.rectTransform.position = currentPosition; // sets the position of the left joystick to where the screen was touched (limited to the left half of the screen)
+
+                            // enables left joystick on touch
+                            leftJoystickBackgroundImage.enabled = true;
+                            leftJoystickBackgroundImage.rectTransform.GetChild(0).GetComponent<Image>().enabled = true;
+                        }
+                        else
+                        {
+                            // left joystick stays fixed, does not set position of left joystick on touch
+
+                            // if the touch happens within the fixed area of the left joystick's background image within the x coordinate
+                            if ((myTouches[i].position.x <= leftJoystickBackgroundImage.rectTransform.position.x) && (myTouches[i].position.x >= (leftJoystickBackgroundImage.rectTransform.position.x - leftJoystickBackgroundImage.rectTransform.sizeDelta.x)))
                             {
-                                var currentPosition = leftJoystickBackgroundImage.rectTransform.position; // gets the current position of the left joystick
-                                currentPosition.x = myTouches[i].position.x + leftJoystickBackgroundImage.rectTransform.sizeDelta.x / 2; // calculates the x position of the left joystick to where the screen was touched
-                                currentPosition.y = myTouches[i].position.y - leftJoystickBackgroundImage.rectTransform.sizeDelta.y / 2; // calculates the y position of the left joystick to where the screen was touched
-
-                                // keeps the left joystick on the left-side half of the screen
-                                currentPosition.x = Mathf.Clamp(currentPosition.x, 0 + leftJoystickBackgroundImage.rectTransform.sizeDelta.x, Screen.width / 2);
-                                currentPosition.y = Mathf.Clamp(currentPosition.y, 0, Screen.height - leftJoystickBackgroundImage.rectTransform.sizeDelta.y);
-
-                                leftJoystickBackgroundImage.rectTransform.position = currentPosition; // sets the position of the left joystick to where the screen was touched (limited to the left half of the screen)
-
-                                // enables left joystick on touch
-                                leftJoystickBackgroundImage.enabled = true;
-                                leftJoystickBackgroundImage.rectTransform.GetChild(0).GetComponent<Image>().enabled = true;
-                            }
-                            else
-                            {
-                                // left joystick stays fixed, does not set position of left joystick on touch
-
-                                // if the touch happens within the fixed area of the left joystick's background image within the x coordinate
-                                if ((myTouches[i].position.x <= leftJoystickBackgroundImage.rectTransform.position.x) && (myTouches[i].position.x >= (leftJoystickBackgroundImage.rectTransform.position.x - leftJoystickBackgroundImage.rectTransform.sizeDelta.x)))
+                                // and the touch also happens within the left joystick's background image y coordinate
+                                if ((myTouches[i].position.y >= leftJoystickBackgroundImage.rectTransform.position.y) && (myTouches[i].position.y <= (leftJoystickBackgroundImage.rectTransform.position.y + leftJoystickBackgroundImage.rectTransform.sizeDelta.y)))
                                 {
-                                    // and the touch also happens within the left joystick's background image y coordinate
-                                    if ((myTouches[i].position.y >= leftJoystickBackgroundImage.rectTransform.position.y) && (myTouches[i].position.y <= (leftJoystickBackgroundImage.rectTransform.position.y + leftJoystickBackgroundImage.rectTransform.sizeDelta.y)))
-                                    {
-                                        // makes the left joystick appear 
-                                        leftJoystickBackgroundImage.enabled = true;
-                                        leftJoystickBackgroundImage.rectTransform.GetChild(0).GetComponent<Image>().enabled = true;
-                                    }
+                                    // makes the left joystick appear 
+                                    leftJoystickBackgroundImage.enabled = true;
+                                    leftJoystickBackgroundImage.rectTransform.GetChild(0).GetComponent<Image>().enabled = true;
                                 }
                             }
                         }
+                    }
 
                     // if this touch is on the right-side half of screen
                     if (myTouches[i].position.x > Screen.width / 2)

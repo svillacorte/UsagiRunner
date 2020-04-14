@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingEnemy : MonoBehaviour {
+public class FlyingEnemy : MonoBehaviour
+{
 
     public GameObject objectToMove;
     public float moveSpeed;
@@ -12,12 +13,14 @@ public class FlyingEnemy : MonoBehaviour {
     public Transform playert;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         if (playertarget == true)
         {
@@ -27,7 +30,7 @@ public class FlyingEnemy : MonoBehaviour {
         }
 
 
-        if (player.transform.position.x > objectToMove.transform.position.x) 
+        if (player.transform.position.x > objectToMove.transform.position.x)
         {
             transform.localScale = new Vector2(1, -1);
         }
@@ -36,5 +39,5 @@ public class FlyingEnemy : MonoBehaviour {
         {
             transform.localScale = new Vector2(1, 1);
         }
-	}
+    }
 }

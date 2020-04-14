@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SetCharacter : MonoBehaviour {
+public class SetCharacter : MonoBehaviour
+{
 
     public Button greenbird;
     public int gb;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         if (PlayerPrefs.HasKey("GB"))
         {
@@ -21,11 +23,12 @@ public class SetCharacter : MonoBehaviour {
             greenbird.interactable = true;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void yellow()
     {
@@ -37,7 +40,7 @@ public class SetCharacter : MonoBehaviour {
         PlayerPrefs.SetInt("character", 1);
     }
 
-    public void green ()
+    public void green()
     {
         PlayerPrefs.SetInt("character", 2);
     }

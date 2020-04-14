@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class killplayer : MonoBehaviour {
+public class killplayer : MonoBehaviour
+{
 
     private LevelManager theLevelManager;
 
     public int damageToGive;
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         theLevelManager = FindObjectOfType<LevelManager>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemySpawner : MonoBehaviour
+{
 
     public GameObject enemy;
     public Transform[] spawnPoints;
     public float minDelay = .1f;
     public float maxDelay = 1f;
-  
+
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         StartCoroutine("SpawnEnemies");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     IEnumerator SpawnEnemies()
     {

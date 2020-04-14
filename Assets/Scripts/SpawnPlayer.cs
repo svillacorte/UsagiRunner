@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPlayer : MonoBehaviour {
+public class SpawnPlayer : MonoBehaviour
+{
 
     private int character;
     public GameObject char1;
@@ -10,9 +11,10 @@ public class SpawnPlayer : MonoBehaviour {
     public GameObject char3;
 
     // Use this for initialization
-    void Start () {
-		
-        if (PlayerPrefs.HasKey ("character"))
+    void Start()
+    {
+
+        if (PlayerPrefs.HasKey("character"))
         {
             character = PlayerPrefs.GetInt("character");
         }
@@ -20,7 +22,7 @@ public class SpawnPlayer : MonoBehaviour {
 
         if (character == 0)
         {
-            Instantiate (char1, this.transform.position, this.transform.rotation);
+            Instantiate(char1, this.transform.position, this.transform.rotation);
         }
 
         if (character == 1)
@@ -28,16 +30,17 @@ public class SpawnPlayer : MonoBehaviour {
             Instantiate(char2, this.transform.position, this.transform.rotation);
         }
 
-        if(character == 2)
+        if (character == 2)
         {
             Instantiate(char3, this.transform.position, this.transform.rotation);
         }
     }
 
-    
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

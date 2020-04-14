@@ -17,7 +17,7 @@ public class SimpleLoading : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-      
+
     }
 
     // Update is called once per frame
@@ -46,21 +46,21 @@ public class SimpleLoading : MonoBehaviour
     }
 
     IEnumerator LoadNewScene()
+    {
+
+        // This line waits for 3 seconds before executing the next line in the coroutine.
+        // This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
+        //yield return new WaitForSeconds(1);
+
+        // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
+        AsyncOperation async = Application.LoadLevelAsync(scene);
+
+        // While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
+        while (!async.isDone)
         {
-
-            // This line waits for 3 seconds before executing the next line in the coroutine.
-            // This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
-            //yield return new WaitForSeconds(1);
-
-            // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
-            AsyncOperation async = Application.LoadLevelAsync(scene);
-
-            // While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
-            while (!async.isDone)
-            {
-                yield return null;
-            }
-
+            yield return null;
         }
+
     }
+}
 

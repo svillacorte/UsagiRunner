@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Duck : MonoBehaviour {
+public class Duck : MonoBehaviour
+{
 
     public Animator myanim;
     public PlayerController pc;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         pc = FindObjectOfType<PlayerController>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void Small()
     {

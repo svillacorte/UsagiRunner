@@ -43,7 +43,7 @@ public class RightJoystickTouchContoller : MonoBehaviour
         {
             rightJoystickHandleImage = rightJoystick.transform.GetChild(0).GetComponent<Image>(); // gets the handle (knob) image of the right joystick
             rightJoystickHandleImage.enabled = rightJoyStickAlwaysVisible; // sets right joystick handle (knob) image to be always visible or not
-        } 
+        }
     }
 
     void Update()

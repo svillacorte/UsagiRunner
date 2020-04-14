@@ -25,8 +25,8 @@ namespace CnControls
             if (EditorApplication.isPlaying && EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 var types = from t in Assembly.GetAssembly(typeof(SimpleButton)).GetTypes()
-                            where 
-                                t.IsClass 
+                            where
+                                t.IsClass
                                 && t.Namespace == "CnControls"
                                 && t.IsSubclassOf(typeof(MonoBehaviour))
                             select t;

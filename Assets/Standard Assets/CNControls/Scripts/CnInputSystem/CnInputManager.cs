@@ -33,7 +33,7 @@ namespace CnControls
         /// </summary>
         private Dictionary<string, List<VirtualButton>> _virtualButtonsDictionary =
             new Dictionary<string, List<VirtualButton>>();
-        
+
         /// <summary>
         /// Additional logic for touch retreival
         /// It's possible to add some reflection-based emulated touches
@@ -114,7 +114,7 @@ namespace CnControls
             // If not, we check our virtual buttons
             if (ButtonExists(buttonName))
             {
-                return GetAnyVirtualButton(Instance._virtualButtonsDictionary[buttonName]);;
+                return GetAnyVirtualButton(Instance._virtualButtonsDictionary[buttonName]); ;
             }
 
             // If there is no such button registered, we return false;
@@ -211,7 +211,7 @@ namespace CnControls
             {
                 if (!Instance._virtualAxisDictionary[virtualAxis.Name].Remove(virtualAxis))
                 {
-                    Debug.LogError("Requested axis " + virtualAxis.Name + " exists, but there's no such virtual axis that you're trying to unregister");                    
+                    Debug.LogError("Requested axis " + virtualAxis.Name + " exists, but there's no such virtual axis that you're trying to unregister");
                 }
             }
             else

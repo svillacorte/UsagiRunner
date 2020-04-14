@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     public float waitToRespawn;
     public PlayerController thePlayer;
@@ -17,73 +18,74 @@ public class LevelManager : MonoBehaviour {
 
     //public int coinCount;
     //
-	//public float PlayerX;
-	//public float PlayerY;
-	//public float PlayerZ;
+    //public float PlayerX;
+    //public float PlayerY;
+    //public float PlayerZ;
 
-	public GameObject DieBurst;
+    public GameObject DieBurst;
 
-	//public Text coinText;
+    //public Text coinText;
 
-	public Image heart1;
-	public Image heart2;
-	public Image heart3;
+    public Image heart1;
+    public Image heart2;
+    public Image heart3;
 
-	public Sprite heartFull;
-	public Sprite heartHalf;
-	public Sprite heartEmpty;
+    public Sprite heartFull;
+    public Sprite heartHalf;
+    public Sprite heartEmpty;
 
-	public int maxHealth;
-	public int healthCount;
+    public int maxHealth;
+    public int healthCount;
 
-	public bool respawning;
-	public ResetOnRespawn[] objectsToReset;
+    public bool respawning;
+    public ResetOnRespawn[] objectsToReset;
 
-	public bool invincible;
+    public bool invincible;
 
-	//public int currentLives;
-	//public int startingLives;
-	//public Text livesText;
+    //public int currentLives;
+    //public int startingLives;
+    //public Text livesText;
     //
-	//public GameObject gameOverScreen;
-	//public AudioSource coinSound;
-	public AudioSource levelMusic;
-	public AudioSource gameOverMusic;
+    //public GameObject gameOverScreen;
+    //public AudioSource coinSound;
+    public AudioSource levelMusic;
+    public AudioSource gameOverMusic;
     //
-	//public GameObject pauseScreen;
+    //public GameObject pauseScreen;
 
 
     // Use this for initialization
 
-    void Start () {
+    void Start()
+    {
 
-		//pauseScreen.SetActive(true);
-        
+        //pauseScreen.SetActive(true);
+
         //thePlayer = FindObjectOfType<PlayerController> ();
         //sr = GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>();
 
         StartCoroutine("FindPlayer");
-        
-		objectsToReset = FindObjectsOfType<ResetOnRespawn> ();
 
-		//if (PlayerPrefs.HasKey ("CoinCount")) 
-		//{
-		//	coinCount = PlayerPrefs.GetInt ("CoinCount");
-		//}
+        objectsToReset = FindObjectsOfType<ResetOnRespawn>();
 
-		//coinText.text = "Stars: " + coinCount;
+        //if (PlayerPrefs.HasKey ("CoinCount")) 
+        //{
+        //	coinCount = PlayerPrefs.GetInt ("CoinCount");
+        //}
 
-		//if (PlayerPrefs.HasKey ("PlayerLives")) 
-		//{
-		//	currentLives = PlayerPrefs.GetInt ("PlayerLives");
-		//} else 
-		//{
-		//	currentLives = startingLives;
-		//}
+        //coinText.text = "Stars: " + coinCount;
+
+        //if (PlayerPrefs.HasKey ("PlayerLives")) 
+        //{
+        //	currentLives = PlayerPrefs.GetInt ("PlayerLives");
+        //} else 
+        //{
+        //	currentLives = startingLives;
+        //}
         //
-		//livesText.text = "Lives x" + currentLives;
-	
-	}
+        //livesText.text = "Lives x" + currentLives;
+
+    }
 
     IEnumerator FindPlayer()
     {
@@ -95,174 +97,175 @@ public class LevelManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
-		if (healthCount <= 0 && !respawning) 
-		{
-			Respawn ();
-			respawning = true;
-		}
-	
-	}
+        if (healthCount <= 0 && !respawning)
+        {
+            Respawn();
+            respawning = true;
+        }
 
-	public void Respawn ()
-	{
-		//currentLives -= 1;
-		//livesText.text = "Lives x" + currentLives;
-		respawning = true;
+    }
 
-		//if (currentLives > 0) {
-			StartCoroutine ("RespawnCo");
-		//} else 
-		//{
-		//	thePlayer.enabled = false;
+    public void Respawn()
+    {
+        //currentLives -= 1;
+        //livesText.text = "Lives x" + currentLives;
+        respawning = true;
+
+        //if (currentLives > 0) {
+        StartCoroutine("RespawnCo");
+        //} else 
+        //{
+        //	thePlayer.enabled = false;
         //   // thePlayer2.enabled = false;
         //    sr.enabled = false;
         //   // sr2.enabled = false;
         //    rb2D.simulated = false;
         //   // rb2D2.simulated = false;
         //    gameOverScreen.SetActive (true);
-		//	pauseScreen.SetActive (false);
-		//	levelMusic.Stop ();
-		//	gameOverMusic.Play ();
-		//	//levelMusic.volume = levelMusic.volume / 2f;
-		//}
-	}
+        //	pauseScreen.SetActive (false);
+        //	levelMusic.Stop ();
+        //	gameOverMusic.Play ();
+        //	//levelMusic.volume = levelMusic.volume / 2f;
+        //}
+    }
 
-	public IEnumerator RespawnCo()
-	{
+    public IEnumerator RespawnCo()
+    {
         thePlayer.enabled = false;
         sr.enabled = false;
         rb2D.simulated = false;
-       // thePlayer2.enabled = false;
-       // sr2.enabled = false;
-       // rb2D2.simulated = false;
-        Instantiate (DieBurst, thePlayer.transform.position, thePlayer.transform.rotation);
-       // Instantiate(DieBurst, thePlayer2.transform.position, thePlayer2.transform.rotation);
+        // thePlayer2.enabled = false;
+        // sr2.enabled = false;
+        // rb2D2.simulated = false;
+        Instantiate(DieBurst, thePlayer.transform.position, thePlayer.transform.rotation);
+        // Instantiate(DieBurst, thePlayer2.transform.position, thePlayer2.transform.rotation);
 
-        yield return new WaitForSeconds (waitToRespawn);
+        yield return new WaitForSeconds(waitToRespawn);
 
-		healthCount = maxHealth;
-		respawning = false;
-		UpdateHeartMeter ();
+        healthCount = maxHealth;
+        respawning = false;
+        UpdateHeartMeter();
         thePlayer.moveSpeed = thePlayer.standardSpeed;
-		//coinCount = 0;
-		//coinText.text = "Stars:" + coinCount;
-		thePlayer.transform.position = thePlayer.respawnPosition;
-       // thePlayer2.transform.position = p2respawn.transform.position;
+        //coinCount = 0;
+        //coinText.text = "Stars:" + coinCount;
+        thePlayer.transform.position = thePlayer.respawnPosition;
+        // thePlayer2.transform.position = p2respawn.transform.position;
 
         thePlayer.enabled = true;
         sr.enabled = true;
         rb2D.simulated = true;
         thePlayer.knockBackCounter = 0;
-      
-      //  thePlayer2.enabled = true;
-      //  sr2.enabled = true;
-      //  rb2D2.simulated = true;
-      //  thePlayer2.knockBackCounter = 0;
 
-        for (int i = 0; i < objectsToReset.Length; i++) 
-		{
-			objectsToReset [i].gameObject.SetActive (true);
-			objectsToReset [i].ResetObject ();
-		}
-	}
+        //  thePlayer2.enabled = true;
+        //  sr2.enabled = true;
+        //  rb2D2.simulated = true;
+        //  thePlayer2.knockBackCounter = 0;
 
-	public void AddCoins (int coinsToAdd)
-	{
-		//coinCount += coinsToAdd;
-		//coinText.text = "Stars: " + coinCount;
-		//coinSound.Play ();
-	}
+        for (int i = 0; i < objectsToReset.Length; i++)
+        {
+            objectsToReset[i].gameObject.SetActive(true);
+            objectsToReset[i].ResetObject();
+        }
+    }
 
-	public void HurtPlayer (int damageToTake)
-	{
-		if (!invincible) 
-		{
-			healthCount -= damageToTake;
-			UpdateHeartMeter ();
-			thePlayer.Knockback ();
-			thePlayer.hitSound.Play ();
-		}
-	}
+    public void AddCoins(int coinsToAdd)
+    {
+        //coinCount += coinsToAdd;
+        //coinText.text = "Stars: " + coinCount;
+        //coinSound.Play ();
+    }
 
-	public void GiveHealth(int healthToGive)
-	{
-		healthCount += healthToGive;
-		
-			if (healthCount > maxHealth)
-			{
-				healthCount = maxHealth;
-			}
+    public void HurtPlayer(int damageToTake)
+    {
+        if (!invincible)
+        {
+            healthCount -= damageToTake;
+            UpdateHeartMeter();
+            thePlayer.Knockback();
+            thePlayer.hitSound.Play();
+        }
+    }
 
-		UpdateHeartMeter ();
-		//coinSound.Play ();
-		
-	}
+    public void GiveHealth(int healthToGive)
+    {
+        healthCount += healthToGive;
 
-	public void UpdateHeartMeter()
-	{
-		switch (healthCount) 
-		{
-		case 6:
-			heart1.sprite = heartFull;
-			heart2.sprite = heartFull;
-			heart3.sprite = heartFull;
-			return;
+        if (healthCount > maxHealth)
+        {
+            healthCount = maxHealth;
+        }
 
-		case 5:
-			heart1.sprite = heartFull;
-			heart2.sprite = heartFull;
-			heart3.sprite = heartHalf;
-			return;
+        UpdateHeartMeter();
+        //coinSound.Play ();
 
-		case 4:
-			heart1.sprite = heartFull;
-			heart2.sprite = heartFull;
-			heart3.sprite = heartEmpty;
-			return;
+    }
 
+    public void UpdateHeartMeter()
+    {
+        switch (healthCount)
+        {
+            case 6:
+                heart1.sprite = heartFull;
+                heart2.sprite = heartFull;
+                heart3.sprite = heartFull;
+                return;
 
-		case 3:
-			heart1.sprite = heartFull;
-			heart2.sprite = heartHalf;
-			heart3.sprite = heartEmpty;
-			return;
+            case 5:
+                heart1.sprite = heartFull;
+                heart2.sprite = heartFull;
+                heart3.sprite = heartHalf;
+                return;
 
-		case 2:
-			heart1.sprite = heartFull;
-			heart2.sprite = heartEmpty;
-			heart3.sprite = heartEmpty;
-			return;
-
-		case 1:
-			heart1.sprite = heartHalf;
-			heart2.sprite = heartEmpty;
-			heart3.sprite = heartEmpty;
-			return;
-
-		case 0:
-			heart1.sprite = heartEmpty;
-			heart2.sprite = heartEmpty;
-			heart3.sprite = heartEmpty;
-			return;
-
-		default:
-			heart1.sprite = heartEmpty;
-			heart2.sprite = heartEmpty;
-			heart3.sprite = heartEmpty;
-			return;
+            case 4:
+                heart1.sprite = heartFull;
+                heart2.sprite = heartFull;
+                heart3.sprite = heartEmpty;
+                return;
 
 
-		}
-	}
+            case 3:
+                heart1.sprite = heartFull;
+                heart2.sprite = heartHalf;
+                heart3.sprite = heartEmpty;
+                return;
 
-	public void AddLives(int livesToAdd)
-	{
-		//currentLives += livesToAdd;
-		//livesText.text = "Lives x" + currentLives;
-		//coinSound.Play ();
-	}
+            case 2:
+                heart1.sprite = heartFull;
+                heart2.sprite = heartEmpty;
+                heart3.sprite = heartEmpty;
+                return;
+
+            case 1:
+                heart1.sprite = heartHalf;
+                heart2.sprite = heartEmpty;
+                heart3.sprite = heartEmpty;
+                return;
+
+            case 0:
+                heart1.sprite = heartEmpty;
+                heart2.sprite = heartEmpty;
+                heart3.sprite = heartEmpty;
+                return;
+
+            default:
+                heart1.sprite = heartEmpty;
+                heart2.sprite = heartEmpty;
+                heart3.sprite = heartEmpty;
+                return;
+
+
+        }
+    }
+
+    public void AddLives(int livesToAdd)
+    {
+        //currentLives += livesToAdd;
+        //livesText.text = "Lives x" + currentLives;
+        //coinSound.Play ();
+    }
 
 
 

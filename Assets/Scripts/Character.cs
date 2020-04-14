@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[System.Serializable] 
-public class Character {
+[System.Serializable]
+public class Character
+{
 
-	public string name;
+    public string name;
 
-	public Character () {
-		this.name = "";
-	}
+    public Character()
+    {
+        this.name = "";
+    }
 }

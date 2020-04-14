@@ -65,7 +65,7 @@ public class DualJoystickPlayerController : MonoBehaviour
         {
             animator.SetBool("isAttacking", false);
         }
-  
+
         // if there is only input from the left joystick
         if (leftJoystickInput != Vector3.zero && rightJoystickInput == Vector3.zero)
         {

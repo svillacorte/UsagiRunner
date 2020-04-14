@@ -1,58 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class frogcontroller : MonoBehaviour {
+public class frogcontroller : MonoBehaviour
+{
 
-	public float moveSpeed;
-	private bool canMove;
+    public float moveSpeed;
+    private bool canMove;
 
-	private Rigidbody2D myRigidbody;
+    private Rigidbody2D myRigidbody;
 
-	// Use this for initialization
+    // Use this for initialization
 
-	//void Awake ()
-	//{
-	//	StartCoroutine (Kill());
-	//}
+    //void Awake ()
+    //{
+    //	StartCoroutine (Kill());
+    //}
 
-	void Start () {
+    void Start()
+    {
 
-		myRigidbody = GetComponent<Rigidbody2D> ();
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        myRigidbody = GetComponent<Rigidbody2D>();
 
-		if (canMove) 
-		{
-			myRigidbody.velocity = new Vector3 (-moveSpeed, myRigidbody.velocity.y, 0f);
-		}
-	
-	}
+    }
 
-	void OnEnable()
-	{
-		canMove = false;
-	}
+    // Update is called once per frame
+    void Update()
+    {
 
-	void OnBecameVisible()
-	{
-		canMove = true;
-	}
+        if (canMove)
+        {
+            myRigidbody.velocity = new Vector3(-moveSpeed, myRigidbody.velocity.y, 0f);
+        }
 
-	void OnTriggerEnter2D (Collider2D other)
-	{
-		if (other.tag == "KillPlane") 
-		{
-			gameObject.SetActive (false);
-		}
-	}
+    }
 
-	//IEnumerator Kill ()
-	//{
-	//	yield return new WaitForSeconds (5f);
-	//	Destroy (gameObject);
-	//}
+    void OnEnable()
+    {
+        canMove = false;
+    }
+
+    void OnBecameVisible()
+    {
+        canMove = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "KillPlane")
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    //IEnumerator Kill ()
+    //{
+    //	yield return new WaitForSeconds (5f);
+    //	Destroy (gameObject);
+    //}
 
 }

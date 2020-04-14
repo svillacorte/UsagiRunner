@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
 
-	public GameObject target;
-	private Vector3 targetPosition;
+    public GameObject target;
+    private Vector3 targetPosition;
 
-	public float followAhead;
-	public float smoothing;
+    public float followAhead;
+    public float smoothing;
 
-	public bool followTarget;
+    public bool followTarget;
     public GameObject P1;
     public GameObject P2;
 
@@ -18,38 +19,43 @@ public class CameraController : MonoBehaviour {
     public bool switched;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         target = P1;
         switched = false;
-		followTarget = true;
+        followTarget = true;
         StartCoroutine("FindPlayer");
-	}
+    }
 
     IEnumerator FindPlayer()
     {
         yield return new WaitForSeconds(.25f);
         target = GameObject.FindGameObjectWithTag("Player");
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-		if (followTarget) 
-		{
-			
-			targetPosition = new Vector3 (target.transform.position.x, transform.position.y, transform.position.z);
+    // Update is called once per frame
+    void Update()
+    {
 
-			if (target.transform.localScale.x > 0f) {
-				targetPosition = new Vector3 (targetPosition.x + followAhead, targetPosition.y, targetPosition.z);
-			} else {
-				targetPosition = new Vector3 (targetPosition.x - followAhead, targetPosition.y, targetPosition.z);
-			}
+        if (followTarget)
+        {
 
-			//transform.position = targetPosition;
+            targetPosition = new Vector3(target.transform.position.x, transform.position.y, transform.position.z);
 
-			transform.position = Vector3.Lerp (transform.position, targetPosition, smoothing * Time.deltaTime);
-		}
+            if (target.transform.localScale.x > 0f)
+            {
+                targetPosition = new Vector3(targetPosition.x + followAhead, targetPosition.y, targetPosition.z);
+            }
+            else
+            {
+                targetPosition = new Vector3(targetPosition.x - followAhead, targetPosition.y, targetPosition.z);
+            }
+
+            //transform.position = targetPosition;
+
+            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime);
+        }
 
         if (switched == false)
         {
@@ -79,6 +85,6 @@ public class CameraController : MonoBehaviour {
             switched = false;
         }
     }
- 
-   
+
+
 }
