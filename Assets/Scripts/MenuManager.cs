@@ -19,17 +19,23 @@ public class MenuManager : MonoBehaviour
     public int goldCount;
     public Text goldText;
 
-    public Button ShopHat;
+    public Button ShopBoost;
     public Button ShopSlime;
     public Button ShopSkelly;
 
-    public bool ownHat;
+    public bool ownBoost;
     public bool ownSlime;
     public bool ownSkelly;
+    public int BoostUpgrade;
 
     // Start is called before the first frame update
     void Start()
     {
+        BoostUpgrade = PlayerPrefs.GetInt("Boost");
+        if(BoostUpgrade == 1)
+        {
+            pc.BoostUpgrade();
+        }
         goldCount = PlayerPrefs.GetInt("Gold");
     }
 
@@ -40,6 +46,8 @@ public class MenuManager : MonoBehaviour
 
         goldText.text = "Gold:" + goldCount;
         PartyHat = PlayerPrefs.GetInt("PartyHat");
+       
+
 
         if (PartyHat == 1)
         {
@@ -60,9 +68,9 @@ public class MenuManager : MonoBehaviour
             Birthdayhat.SetActive(false);
         }
 
-        if (goldCount >= 1 && ownHat == false)
+        if (goldCount >= 10 && ownBoost == false)
         {
-            ShopHat.interactable = true;
+            ShopBoost.interactable = true;
         }
     }
 
@@ -95,12 +103,17 @@ public class MenuManager : MonoBehaviour
             inventoryholder.SetBool("Open", true);
     }
 
-    public void BuyHat()
+    public void CloseIn()
     {
-        goldCount -= 1;
-        PlayerPrefs.SetInt("PartyHat", 1);
-        ShopHat.interactable = false;
-        ownHat = true;
+        inventoryholder.SetBool("Open", false);
+    }
+
+    public void BuyBoost()
+    {
+        goldCount -= 10;
+        PlayerPrefs.SetInt("Boost", 1);
+        ShopBoost.interactable = false;
+        ownBoost = true;
     }
 
     public void PutOnHat()
@@ -110,8 +123,13 @@ public class MenuManager : MonoBehaviour
 
     public void Reset()
     {
-        PlayerPrefs.SetInt("PartyHat", 0);
-        inventoryHat.SetActive(false);
-        wearHat = false;
+        PlayerPrefs.SetInt("Gold", 0);
+        PlayerPrefs.SetInt("Boost", 0);
+        goldCount = PlayerPrefs.GetInt("Gold");
+        goldText.text = "Gold:" + goldCount;
+        pc.maxboosttime = 5;
+        pc.boosttime = 5;
+        pc.boostbar.transform.localScale = new Vector3(1, 1, 1);
+        ownBoost = false;
     }
 }

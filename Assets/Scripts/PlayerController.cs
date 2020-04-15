@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     public float boostSpeed;
     public float standardSpeed;
     public bool nowboosting;
+    public MenuManager mm;
 
 
     // Use this for initialization
@@ -113,6 +114,7 @@ public class PlayerController : MonoBehaviour
         maxboosttime = 10;
         boosttime = 10;
         boostbar.transform.localScale = new Vector3(2, 1, 1);
+        mm.ownBoost = true;
     }
 
     void Update()

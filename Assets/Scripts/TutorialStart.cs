@@ -26,7 +26,7 @@ public class TutorialStart : MonoBehaviour
     IEnumerator Tutorial()
     {
         pc.moveSpeed = 0;
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(3f);
         Fence.enabled = true;
         FrontBamboo.enabled = true;
         BackBamboo.enabled = true;

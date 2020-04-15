@@ -47,7 +47,7 @@ public class LevelEnd1 : MonoBehaviour
             thePlayer.myRigidBody.velocity = new Vector3(thePlayer.moveSpeed, thePlayer.myRigidBody.velocity.y, 0f);
         }
 
-        if (score >= 2 && levelOver == false)
+        if (score >= 50 && levelOver == false)
         {
             levelOver = true;
             StartCoroutine("LevelEndCo");
