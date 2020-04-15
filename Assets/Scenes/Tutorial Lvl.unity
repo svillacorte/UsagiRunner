@@ -4572,7 +4572,7 @@ GameObject:
   - component: {fileID: 364725522}
   - component: {fileID: 364725521}
   m_Layer: 0
-  m_Name: Tutorial Collider (1)
+  m_Name: Tutorial dash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13904,7 +13904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.74509805}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -15907,7 +15907,7 @@ GameObject:
   - component: {fileID: 1128943794}
   - component: {fileID: 1128943796}
   m_Layer: 0
-  m_Name: Tutorial Collider
+  m_Name: Tutorial jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16085,7 +16085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131695559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.69023, y: -2.5606992, z: 0}
+  m_LocalPosition: {x: 55.78, y: -2.5606992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -20905,7 +20905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2085049712
 RectTransform:
   m_ObjectHideFlags: 0
