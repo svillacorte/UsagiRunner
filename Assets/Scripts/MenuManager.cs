@@ -54,19 +54,6 @@ public class MenuManager : MonoBehaviour
             inventoryHat.SetActive(true);
         }
 
-        if (wearHat == true)
-        {
-            pc.moveSpeed = 8;
-            pc.jumpSpeed = 18;
-            Birthdayhat.SetActive(true);
-        }
-
-        if(wearHat == false)
-        {
-            pc.moveSpeed = 5;
-            pc.jumpSpeed = 10;
-            Birthdayhat.SetActive(false);
-        }
 
         if (goldCount >= 10 && ownBoost == false)
         {

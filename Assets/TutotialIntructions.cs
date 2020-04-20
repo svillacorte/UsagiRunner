@@ -37,6 +37,12 @@ public class TutotialIntructions : MonoBehaviour
 
             }
         }
+
+        //if swipeleft == true
+        //textattack.enabled = false
+
+        //if swipedown == true
+        //textduck.enabled = false
     }
 
             private void OnTriggerEnter2D(Collider2D collision)
