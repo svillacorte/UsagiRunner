@@ -10,7 +10,7 @@ public class TutotialIntructions : MonoBehaviour
     public Text textBoost;
     public Text textON;
     public Text textOFF;
-    public 
+   
 
     // Start is called before the first frame update
     void Start()
@@ -26,15 +26,6 @@ public class TutotialIntructions : MonoBehaviour
             if (CnInputManager.GetButtonDown("Jump"))
             {
                 textJump.enabled = false;
-            }
-        }
-
-        if (textON.enabled == true)
-        {
-            if (CnInputManager.GetButtonDown("Boost"))
-            {
-                textBoost.enabled = false;
-
             }
         }
 

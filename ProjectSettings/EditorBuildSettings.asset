@@ -9,21 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: dbbf1712fdbfec84781f53b2833b19ce
   - enabled: 1
-    path: Assets/Scenes/Lvl1.unity
-    guid: da61767e247214cc4836b8f2d47db01a
-  - enabled: 1
-    path: Assets/Scenes/Shop.unity
-    guid: c6e5e34eb94454255a49f78cc913b640
-  - enabled: 1
-    path: Assets/Scenes/PlayerSelect.unity
-    guid: 80a3a2f66a8f8a242b6c376f7bf41c6d
-  - enabled: 1
-    path: Assets/Scenes/LoadingScene.unity
+    path: Assets/Scenes/OtherScenes/LoadingScene.unity
     guid: ad2b78f55e82e744483d405d40169bc9
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: 7d8b8ad71bec39340a8a26afa991d79e
+    path: Assets/Scenes/OtherScenes/Tutorial.unity
+    guid: 71ed25d239d671f4395692cd8022a673
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: 1657838ccba794e18b9cf8a0e1426148
+    path: Assets/Scenes/OtherScenes/LoadingScene2.unity
+    guid: 7e27fcf645e598543b490ee035efba94
+  - enabled: 1
+    path: Assets/Scenes/OtherScenes/Lvl1.unity
+    guid: da61767e247214cc4836b8f2d47db01a
+  - enabled: 1
+    path: Assets/Scenes/OtherScenes/Shop.unity
+    guid: c6e5e34eb94454255a49f78cc913b640
+  - enabled: 1
+    path: Assets/Scenes/OtherScenes/PlayerSelect.unity
+    guid: 80a3a2f66a8f8a242b6c376f7bf41c6d
   m_configObjects: {}
