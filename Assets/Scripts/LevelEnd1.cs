@@ -80,10 +80,6 @@ public class LevelEnd1 : MonoBehaviour
         theLevelManager.invincible = true;
         thePlayer.myRigidBody.velocity = Vector3.zero;
         anim.SetBool("end", true);
-        anim.SetBool("end", true);
-        anim.SetBool("end", true);
-        anim.SetBool("end", true);
-        anim.SetBool("end", true);
 
         //PlayerPrefs.SetInt ("CoinCount", theLevelManager.coinCount);
         //PlayerPrefs.SetInt ("PlayerLives", theLevelManager.currentLives);
