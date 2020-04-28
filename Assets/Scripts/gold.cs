@@ -5,6 +5,7 @@ using UnityEngine;
 public class gold : MonoBehaviour
 {
     public MenuManager mm;
+    public AudioSource goldSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class gold : MonoBehaviour
         if (collision.tag == "Player")
         {
             mm.goldCount += 1;
+            goldSound.Play();
             this.gameObject.SetActive(false);
         }
     }

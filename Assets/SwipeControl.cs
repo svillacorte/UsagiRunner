@@ -36,7 +36,7 @@ public class SwipeControl : MonoBehaviour
                     Debug.Log("up swipe");
                 }
 
-                if (currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+                if (currentSwipe.y < -0.5 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
                 {
                     Debug.Log("down swipe");
                     anim.SetTrigger("Slide");
@@ -47,7 +47,7 @@ public class SwipeControl : MonoBehaviour
                     Debug.Log("left swipe");
                 }
 
-                if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                if (currentSwipe.x > 0.001 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
                 {
                     Debug.Log("right swipe");
                     anim.SetTrigger("AtkR");

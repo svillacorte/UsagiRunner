@@ -15,6 +15,10 @@ public class LevelEnd1 : MonoBehaviour
     public float waitToLoad;
     private bool movePlayer;
     public Animator anim;
+    public Animator fence;
+    public Animator backBamboo;
+    public Animator frontBamboo;
+    public Animator clouds;
 
     public GameObject pauseScreen;
 
@@ -79,14 +83,17 @@ public class LevelEnd1 : MonoBehaviour
         //pauseScreen.SetActive (false);
         theLevelManager.invincible = true;
         thePlayer.myRigidBody.velocity = Vector3.zero;
-        anim.SetBool("end", true);
+        fence.SetBool("end", true);
+        backBamboo.SetBool("end", true);
+        frontBamboo.SetBool("end", true);
+        clouds.SetBool("end", true);
 
         //PlayerPrefs.SetInt ("CoinCount", theLevelManager.coinCount);
         //PlayerPrefs.SetInt ("PlayerLives", theLevelManager.currentLives);
         PlayerPrefs.SetInt("GB", 2);
 
-        theLevelManager.levelMusic.Stop();
-        theLevelManager.gameOverMusic.Play();
+        //theLevelManager.levelMusic.Stop();
+        //theLevelManager.gameOverMusic.Play();
 
         yield return new WaitForSeconds(waitToMove);
         movePlayer = true;

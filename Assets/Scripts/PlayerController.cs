@@ -185,20 +185,6 @@ public class PlayerController : MonoBehaviour
         myAnim.SetFloat("JumpSpeed", myRigidBody.velocity.y);
         myAnim.SetBool("Grounded", isGrounded);
 
-        if (myRigidBody.velocity.y < 0)
-        {
-            stompBox.SetActive(true);
-        }
-        else
-        {
-            stompBox.SetActive(false);
-        }
-
-        if (joystick == true)
-        {
-            leftJoystickInput = leftJoystick.GetInputDirection();
-        }
-
 
         if (isGrounded == true)
         {
@@ -359,10 +345,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator boostup()
     {
-
-        moveSpeed = boostSpeed;
+        myAnim.SetTrigger("Boost");
+        //moveSpeed = boostSpeed;
         yield return new WaitForSeconds(5f);
-        moveSpeed = standardSpeed;
+        //moveSpeed = standardSpeed;
         nowboosting = false;
     }
 
